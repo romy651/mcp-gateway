@@ -176,7 +176,7 @@ async def callback(
     config = _get_config()
 
     # Exchange authorization code for tokens
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(verify=False) as client:
         token_response = await client.post(
             ATLASSIAN_TOKEN_URL,
             json={
@@ -298,7 +298,7 @@ async def get_token(req: TokenRequest):
 
 async def _get_cloud_info(access_token: str) -> dict:
     """Fetch the user's Atlassian Cloud ID and site URL from accessible resources."""
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(verify=False) as client:
         resp = await client.get(
             ATLASSIAN_RESOURCES_URL,
             headers={"Authorization": f"Bearer {access_token}"},
@@ -326,7 +326,7 @@ async def _refresh_token(email: str, entry: dict) -> dict:
     """Refresh an expired Atlassian access token."""
     config = _get_config()
 
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(verify=False) as client:
         resp = await client.post(
             ATLASSIAN_TOKEN_URL,
             json={
