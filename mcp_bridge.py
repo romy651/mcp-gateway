@@ -69,6 +69,10 @@ def create_mcp_bridge(token_store):
 
         # Build env for mcp-atlassian
         child_env = os.environ.copy()
+        # Disable SSL verification for corporate proxies (Zscaler, Cisco, etc.)
+        child_env["PYTHONHTTPSVERIFY"] = "0"
+        child_env["CURL_CA_BUNDLE"] = ""
+        child_env["REQUESTS_CA_BUNDLE"] = ""
         child_env["ATLASSIAN_OAUTH_ACCESS_TOKEN"] = entry["access_token"]
         child_env["ATLASSIAN_OAUTH_CLOUD_ID"] = entry.get("cloud_id", "")
         child_env["ATLASSIAN_OAUTH_ENABLE"] = "true"
