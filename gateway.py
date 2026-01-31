@@ -362,6 +362,14 @@ async def _refresh_token(email: str, entry: dict) -> dict:
     return updated
 
 
+# ─── MCP SSE Bridge ──────────────────────────────────────────────────────────
+
+from mcp_bridge import create_mcp_bridge
+
+mcp_app = create_mcp_bridge(store)
+app.mount("/", mcp_app)
+
+
 # ─── Main ────────────────────────────────────────────────────────────────────
 
 

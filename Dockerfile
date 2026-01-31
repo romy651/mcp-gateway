@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY gateway.py .
 COPY token_store.py .
+COPY mcp_bridge.py .
 
 EXPOSE 3001
 

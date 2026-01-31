@@ -5,3 +5,4 @@ python-dotenv>=1.0.0
 mcp-atlassian>=0.13.0
 redis>=5.0.0
 cryptography>=41.0.0
+sse-starlette>=2.0.0
